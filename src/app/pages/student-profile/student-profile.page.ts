@@ -75,8 +75,12 @@ export class StudentProfilePage implements OnInit {
       await loading.present();
 
       try {
+        //Use the AI filter to create a caricature effect on the photo
         const processed = await this.studentService.applyAIFilter(dataUrl);
         this.student.profilePicture = processed;
+
+        //Save the profile picture normally, without the AI filter, for future edits
+        // this.student.profilePicture = dataUrl;
         await this.studentService.saveStudent(this.student);
       } finally {
         await loading.dismiss();
