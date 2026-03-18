@@ -141,10 +141,6 @@ export class StudentService {
         bulge(w * rand(0.07, 0.14), h * rand(0.41, 0.50), w * rand(0.09, 0.15), randStr(2.0, 3.2, 0.25, 0.65));
         // Right ear
         bulge(w * rand(0.86, 0.93), h * rand(0.41, 0.50), w * rand(0.09, 0.15), randStr(2.0, 3.2, 0.25, 0.65));
-        // Forehead
-        bulge(w * rand(0.44, 0.56), h * rand(0.17, 0.26), w * rand(0.17, 0.27), randStr(1.5, 2.6, 0.30, 0.70));
-        // Hair (top of head)
-        bulge(w * rand(0.42, 0.58), h * rand(0.03, 0.11), w * rand(0.19, 0.30), randStr(1.3, 2.2, 0.35, 0.75));
         // Mouth
         bulge(w * rand(0.45, 0.55), h * rand(0.67, 0.74), w * rand(0.11, 0.17), randStr(2.0, 3.4, 0.22, 0.60));
         // Chin / jaw
