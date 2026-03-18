@@ -1,0 +1,157 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-title>
+      <div class="header-title">
+        <ion-icon name="school-outline"></ion-icon>
+        Student Profile
+      </div>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="form-content">
+  <div class="hero-section">
+    <div class="hero-icon">
+      <ion-icon name="person-circle-outline"></ion-icon>
+    </div>
+    <h2>Create Your Profile</h2>
+    <p>Fill in your student information below</p>
+  </div>
+
+  <form [formGroup]="studentForm" (ngSubmit)="onSubmit()" class="form-container">
+
+    <!-- Personal Information Section -->
+    <div class="section-card">
+      <div class="section-header">
+        <ion-icon name="person-outline" color="primary"></ion-icon>
+        <span>Personal Information</span>
+      </div>
+
+      <div class="field-group">
+        <ion-item [class.invalid-item]="isInvalid('name')" lines="none">
+          <ion-icon slot="start" name="reader-outline" color="medium"></ion-icon>
+          <ion-label position="stacked">Full Name <span class="required">*</span></ion-label>
+          <ion-input formControlName="name" placeholder="e.g. Juan Dela Cruz" clearInput></ion-input>
+        </ion-item>
+        <div class="error-msg" *ngIf="isInvalid('name')">
+          <ion-icon name="alert-circle-outline"></ion-icon>
+          Please enter a valid full name (min. 2 characters)
+        </div>
+      </div>
+
+      <div class="field-group">
+        <ion-item [class.invalid-item]="isInvalid('studentId')" lines="none">
+          <ion-icon slot="start" name="card-outline" color="medium"></ion-icon>
+          <ion-label position="stacked">Student ID <span class="required">*</span></ion-label>
+          <ion-input formControlName="studentId" placeholder="e.g. 2024-00001" clearInput></ion-input>
+        </ion-item>
+        <div class="error-msg" *ngIf="isInvalid('studentId')">
+          <ion-icon name="alert-circle-outline"></ion-icon>
+          Student ID is required
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field-group half">
+          <ion-item [class.invalid-item]="isInvalid('gender')" lines="none">
+            <ion-icon slot="start" name="transgender-outline" color="medium"></ion-icon>
+            <ion-label position="stacked">Gender <span class="required">*</span></ion-label>
+            <ion-select formControlName="gender" placeholder="Select" interface="action-sheet">
+              <ion-select-option *ngFor="let g of genders" [value]="g">{{ g }}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <div class="error-msg" *ngIf="isInvalid('gender')">
+            <ion-icon name="alert-circle-outline"></ion-icon>
+            Required
+          </div>
+        </div>
+
+        <div class="field-group half">
+          <ion-item [class.invalid-item]="isInvalid('age')" lines="none">
+            <ion-icon slot="start" name="calendar-outline" color="medium"></ion-icon>
+            <ion-label position="stacked">Age <span class="required">*</span></ion-label>
+            <ion-input formControlName="age" type="number" placeholder="18" min="15" max="60"></ion-input>
+          </ion-item>
+          <div class="error-msg" *ngIf="isInvalid('age')">
+            <ion-icon name="alert-circle-outline"></ion-icon>
+            Must be 15–60
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Academic Information Section -->
+    <div class="section-card">
+      <div class="section-header">
+        <ion-icon name="library-outline" color="primary"></ion-icon>
+        <span>Academic Information</span>
+      </div>
+
+      <div class="field-group">
+        <ion-item [class.invalid-item]="isInvalid('course')" lines="none">
+          <ion-icon slot="start" name="book-outline" color="medium"></ion-icon>
+          <ion-label position="stacked">Course / Program <span class="required">*</span></ion-label>
+          <ion-input formControlName="course" placeholder="e.g. BS Computer Science" clearInput></ion-input>
+        </ion-item>
+        <div class="error-msg" *ngIf="isInvalid('course')">
+          <ion-icon name="alert-circle-outline"></ion-icon>
+          Course is required
+        </div>
+      </div>
+
+      <div class="field-group">
+        <ion-item [class.invalid-item]="isInvalid('yearLevel')" lines="none">
+          <ion-icon slot="start" name="layers-outline" color="medium"></ion-icon>
+          <ion-label position="stacked">Year Level <span class="required">*</span></ion-label>
+          <ion-select formControlName="yearLevel" placeholder="Select year" interface="action-sheet">
+            <ion-select-option *ngFor="let y of yearLevels" [value]="y">{{ y }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <div class="error-msg" *ngIf="isInvalid('yearLevel')">
+          <ion-icon name="alert-circle-outline"></ion-icon>
+          Year level is required
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact Information Section -->
+    <div class="section-card">
+      <div class="section-header">
+        <ion-icon name="call-outline" color="primary"></ion-icon>
+        <span>Contact Information</span>
+      </div>
+
+      <div class="field-group">
+        <ion-item [class.invalid-item]="isInvalid('email')" lines="none">
+          <ion-icon slot="start" name="mail-outline" color="medium"></ion-icon>
+          <ion-label position="stacked">Email Address <span class="required">*</span></ion-label>
+          <ion-input formControlName="email" type="email" placeholder="student@school.edu.ph" clearInput></ion-input>
+        </ion-item>
+        <div class="error-msg" *ngIf="isInvalid('email')">
+          <ion-icon name="alert-circle-outline"></ion-icon>
+          Enter a valid email address
+        </div>
+      </div>
+
+      <div class="field-group">
+        <ion-item [class.invalid-item]="isInvalid('phone')" lines="none">
+          <ion-icon slot="start" name="phone-portrait-outline" color="medium"></ion-icon>
+          <ion-label position="stacked">Phone Number <span class="required">*</span></ion-label>
+          <ion-input formControlName="phone" type="tel" placeholder="+63 9XX XXX XXXX" clearInput></ion-input>
+        </ion-item>
+        <div class="error-msg" *ngIf="isInvalid('phone')">
+          <ion-icon name="alert-circle-outline"></ion-icon>
+          Enter a valid phone number
+        </div>
+      </div>
+    </div>
+
+    <div class="submit-section">
+      <ion-button expand="block" type="submit" size="large" class="submit-btn">
+        <ion-icon slot="start" name="checkmark-circle-outline"></ion-icon>
+        View My Profile
+      </ion-button>
+    </div>
+
+  </form>
+</ion-content>

@@ -1,0 +1,161 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-title>
+      <div class="header-title">
+        <ion-icon name="id-card-outline"></ion-icon>
+        Student Profile
+      </div>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="editProfile()" fill="clear" color="light">
+        <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+      </ion-button>
+      <ion-button (click)="clearAllData()" fill="clear" color="light">
+        <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="profile-content" *ngIf="!isLoading && student">
+
+  <!-- Profile Header Card -->
+  <div class="profile-hero">
+    <div class="profile-avatar-wrap" (click)="changePhoto()">
+      <div class="profile-avatar" *ngIf="!student.profilePicture">
+        <span class="initials">{{ getInitials() }}</span>
+      </div>
+      <img *ngIf="student.profilePicture" [src]="student.profilePicture" class="profile-img" alt="Profile Photo" />
+      <div class="camera-badge">
+        <ion-icon name="camera"></ion-icon>
+      </div>
+    </div>
+
+    <h1 class="profile-name">{{ student.name }}</h1>
+    <div class="student-id-badge">
+      <ion-icon name="card-outline"></ion-icon>
+      {{ student.studentId }}
+    </div>
+
+    <div class="course-badge">
+      <ion-icon name="school-outline"></ion-icon>
+      {{ student.course }} · {{ student.yearLevel }}
+    </div>
+  </div>
+
+  <!-- Info Cards -->
+  <div class="cards-container">
+
+    <!-- Personal Details -->
+    <div class="info-card">
+      <div class="card-title">
+        <ion-icon name="person-outline" color="primary"></ion-icon>
+        Personal Details
+      </div>
+
+      <div class="info-row">
+        <div class="info-icon">
+          <ion-icon [name]="getGenderIcon()"></ion-icon>
+        </div>
+        <div class="info-content">
+          <span class="info-label">Gender</span>
+          <span class="info-value">{{ student.gender }}</span>
+        </div>
+      </div>
+
+      <div class="info-divider"></div>
+
+      <div class="info-row">
+        <div class="info-icon">
+          <ion-icon name="calendar-number-outline"></ion-icon>
+        </div>
+        <div class="info-content">
+          <span class="info-label">Age</span>
+          <span class="info-value">{{ student.age }} years old</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Academic Details -->
+    <div class="info-card">
+      <div class="card-title">
+        <ion-icon name="library-outline" color="primary"></ion-icon>
+        Academic Details
+      </div>
+
+      <div class="info-row">
+        <div class="info-icon">
+          <ion-icon name="book-outline"></ion-icon>
+        </div>
+        <div class="info-content">
+          <span class="info-label">Course / Program</span>
+          <span class="info-value">{{ student.course }}</span>
+        </div>
+      </div>
+
+      <div class="info-divider"></div>
+
+      <div class="info-row">
+        <div class="info-icon">
+          <ion-icon name="layers-outline"></ion-icon>
+        </div>
+        <div class="info-content">
+          <span class="info-label">Year Level</span>
+          <span class="info-value">{{ student.yearLevel }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact Details -->
+    <div class="info-card">
+      <div class="card-title">
+        <ion-icon name="call-outline" color="primary"></ion-icon>
+        Contact Details
+      </div>
+
+      <div class="info-row">
+        <div class="info-icon">
+          <ion-icon name="mail-outline"></ion-icon>
+        </div>
+        <div class="info-content">
+          <span class="info-label">Email Address</span>
+          <span class="info-value">{{ student.email }}</span>
+        </div>
+      </div>
+
+      <div class="info-divider"></div>
+
+      <div class="info-row">
+        <div class="info-icon">
+          <ion-icon name="phone-portrait-outline"></ion-icon>
+        </div>
+        <div class="info-content">
+          <span class="info-label">Phone Number</span>
+          <span class="info-value">{{ student.phone }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="action-buttons">
+      <ion-button expand="block" (click)="editProfile()" class="edit-btn">
+        <ion-icon slot="start" name="create-outline"></ion-icon>
+        Edit Profile
+      </ion-button>
+      <ion-button expand="block" fill="outline" (click)="changePhoto()" class="photo-btn">
+        <ion-icon slot="start" name="camera-outline"></ion-icon>
+        Change Photo
+      </ion-button>
+    </div>
+
+  </div>
+
+</ion-content>
+
+<!-- Loading State -->
+<ion-content *ngIf="isLoading" class="loading-content">
+  <div class="loading-wrap">
+    <ion-spinner name="crescent" color="primary"></ion-spinner>
+    <p>Loading profile...</p>
+  </div>
+</ion-content>
